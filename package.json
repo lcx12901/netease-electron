@@ -1,0 +1,76 @@
+{
+  "name": "wktl-music",
+  "author": "lincx",
+  "private": true,
+  "version": "0.0.1",
+  "main": "dist/electron/index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "serve": "vite preview",
+    "electron": "wait-on tcp:12901 && electron .",
+    "electron:pack": "electron-builder --dir",
+    "electron:dev": "concurrently -k \"cross-env IS_DEV=true yarn dev\" \"yarn electron\"",
+    "electron:builder": "electron-builder",
+    "build:for:electron": "vue-tsc --noEmit && cross-env ELECTRON=true vite build",
+    "app:build": "yarn build:for:electron && yarn electron:builder"
+  },
+  "dependencies": {
+    "@unblockneteasemusic/server": "^0.27.0-rc.6",
+    "NeteaseCloudMusicApi": "^4.6.2",
+    "electron-store": "^8.0.2",
+    "vue": "^3.2.37",
+    "vue-router": "^4.0.16",
+    "yargs": "^17.5.1"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.42",
+    "@vitejs/plugin-vue": "^2.3.3",
+    "@windicss/plugin-scrollbar": "^1.2.3",
+    "concurrently": "^7.2.1",
+    "cross-env": "^7.0.3",
+    "electron": "^20.0.0-alpha.4",
+    "electron-builder": "^23.0.3",
+    "electron-devtools-installer": "^3.2.0",
+    "eslint": "^8.6.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-vue": "^9.1.1",
+    "prettier": "^2.5.1",
+    "sass": "^1.47.0",
+    "typescript": "^4.7.3",
+    "unplugin-auto-import": "^0.8.7",
+    "unplugin-vue-components": "^0.19.6",
+    "vite": "^2.9.12",
+    "vite-plugin-commonjs": "^0.4.7",
+    "vite-plugin-electron": "^0.4.8",
+    "vite-plugin-resolve": "^2.1.2",
+    "vite-plugin-svg-icons": "^2.0.1",
+    "vite-plugin-windicss": "^1.8.4",
+    "vitejs-plugin-electron": "^1.3.0",
+    "vue-global-api": "^0.4.1",
+    "vue-tsc": "^0.37.3",
+    "wait-on": "^6.0.1",
+    "windicss": "^3.5.4"
+  },
+  "build": {
+    "appId": "lincx.wktl.app",
+    "productName": "lincx-wktl",
+    "copyright": "Copyright © 2022 lincx",
+    "mac": {
+      "category": "lincx.wktl.app"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "files": [
+      "dist/**/*",
+      "/dist/electron/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets",
+      "output": "dist_electron"
+    }
+  }
+}
